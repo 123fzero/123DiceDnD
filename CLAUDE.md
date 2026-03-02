@@ -37,6 +37,12 @@ SDK: Momentum firmware (`ufbt update --index-url=https://up.momentum-fw.dev/firm
 - Serial debugging: `log debug` via CLI on `/dev/cu.usbmodemflip_Rank3r31`
 - Stack size: 8KB, app requires `gui` and `notification` services
 
+## Versioning
+
+- Semver (MAJOR.MINOR.PATCH) in `dice_roller/application.fam` field `fap_version`
+- Every commit bumps version and gets an annotated git tag `vX.Y.Z`
+- Bug fixes → PATCH, new features → MINOR, breaking changes → MAJOR
+
 ## Language
 
 User prefers communication in Russian. All code and documentation must be in English.

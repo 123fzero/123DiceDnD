@@ -1,5 +1,7 @@
 # 123 Dice — D&D Dice Roller for Flipper Zero
 
+**Version: 1.0.0**
+
 A full-featured dice roller for tabletop RPGs. All D&D polyhedral dice with 3D rotation animation.
 
 ## Features
