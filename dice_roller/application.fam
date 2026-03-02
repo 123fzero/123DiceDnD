@@ -10,5 +10,5 @@ App(
     fap_icon_assets="images",
     fap_author="Claude & User",
     fap_description="D&D Dice Roller with full polyhedral set",
-    fap_version="1.0",
+    fap_version="1.0.0",
 )
