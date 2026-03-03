@@ -2,7 +2,7 @@
 
 > **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
 
-**Goal:** Add pseudo-3D rotating sprite animation for all 6 polyhedral dice types to the existing Flipper Zero Dice Roller app.
+**Goal:** Add pseudo-3D rotating sprite animation for all 6 polyhedral dice types to the existing Flipper Zero 123DiceDnD app.
 
 **Architecture:** Python script generates 3D→2D projected wireframe+fill renders of each polyhedron at 8 rotation angles, rasterized to 24×24 1-bit XBM. Exported as a C header. The C code references these sprites during the Rolling state with decelerating frame timing and per-die phase offsets.
 

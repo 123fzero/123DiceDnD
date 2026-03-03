@@ -1,6 +1,6 @@
 App(
     appid="dice_roller",
-    name="Dice Roller",
+    name="123DiceDnD",
     apptype=FlipperAppType.EXTERNAL,
     entry_point="dice_roller_main",
     requires=["gui", "notification"],
@@ -9,6 +9,6 @@ App(
     fap_icon="images/dice_10px.png",
     fap_icon_assets="images",
     fap_author="Claude & User",
-    fap_description="D&D Dice Roller with full polyhedral set",
-    fap_version="1.0.1",
+    fap_description="123DiceDnD with full polyhedral set",
+    fap_version="1.0.2",
 )

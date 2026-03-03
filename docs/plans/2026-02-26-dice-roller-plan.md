@@ -1,4 +1,4 @@
-# Dice Roller Implementation Plan
+# 123DiceDnD Implementation Plan
 
 **Status:** COMPLETED
 

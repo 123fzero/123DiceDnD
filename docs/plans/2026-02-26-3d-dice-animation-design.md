@@ -2,7 +2,7 @@
 
 ## Summary
 
-Add pseudo-3D rotating dice animation to the Dice Roller app. Pre-rendered XBM sprite frames for all 6 polyhedral types (d4, d6, d8, d10, d12, d20), with decelerating rotation and phase-shifted multi-dice display.
+Add pseudo-3D rotating dice animation to the 123DiceDnD app. Pre-rendered XBM sprite frames for all 6 polyhedral types (d4, d6, d8, d10, d12, d20), with decelerating rotation and phase-shifted multi-dice display.
 
 ## Sprites
 

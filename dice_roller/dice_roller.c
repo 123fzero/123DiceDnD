@@ -149,7 +149,7 @@ static void draw_die_sprite(Canvas* canvas, int x, int y, int dice_type, int fra
 static void draw_splash(Canvas* canvas) {
     canvas_draw_xbm(canvas, 52, 2, CLAUDE_WIDTH, CLAUDE_HEIGHT, claude_xbm);
     canvas_set_font(canvas, FontPrimary);
-    canvas_draw_str_aligned(canvas, 64, 42, AlignCenter, AlignTop, "Dice Roller");
+    canvas_draw_str_aligned(canvas, 64, 42, AlignCenter, AlignTop, "123DiceDnD");
     canvas_set_font(canvas, FontSecondary);
     canvas_draw_str_aligned(canvas, 64, 55, AlignCenter, AlignTop, "Co-authored by Claude");
 }

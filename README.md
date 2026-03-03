@@ -1,8 +1,10 @@
-# 123 Dice — D&D Dice Roller for Flipper Zero
+# 123DiceDnD for Flipper Zero
 
-**Version: 1.0.0**
+**Version: 1.0.2**
 
-A full-featured dice roller for tabletop RPGs. All D&D polyhedral dice with 3D rotation animation.
+`123DiceDnD` is a Flipper Zero D&D dice roller app for tabletop RPG sessions. It turns Flipper Zero into a fast pocket dice roller with support for all standard polyhedral dice, animated rolls, and multi-die totals.
+
+If you are looking for a Flipper Zero dice app, Flipper Zero tabletop RPG tool, or a Dungeons & Dragons dice roller for Momentum firmware, this repository is built for that exact use case.
 
 ## Features
 
@@ -11,6 +13,13 @@ A full-featured dice roller for tabletop RPGs. All D&D polyhedral dice with 3D r
 - 3D rotating polyhedron animation with deceleration
 - Vibration on result
 - Sum display when rolling multiple dice
+
+## Why Use 123DiceDnD
+
+- Built specifically as a Flipper Zero dice roller for D&D and other tabletop RPGs
+- Covers the full standard polyhedral set used in Dungeons & Dragons
+- Works well as a quick RPG utility when you do not want to carry physical dice
+- Designed for Momentum firmware and native Flipper Zero app workflows
 
 ## Screenshots
 
@@ -51,7 +60,7 @@ A full-featured dice roller for tabletop RPGs. All D&D polyhedral dice with 3D r
 | OK | Roll |
 | Back | Exit |
 
-## Build
+## Build And Install
 
 Requires [ufbt](https://github.com/flipperdevices/flipperzero-ufbt) and a Flipper Zero with Momentum firmware.
 
@@ -94,6 +103,10 @@ python3 tools/gen_sprites.py
 ```
 
 6 types × 8 frames = 48 sprites at 24×24px in XBM format.
+
+## SEO Keywords
+
+Flipper Zero dice roller, Flipper Zero D&D app, Flipper Zero tabletop RPG tool, D&D dice roller, Dungeons & Dragons dice app, polyhedral dice roller, Momentum firmware app.
 
 ## Authors
 

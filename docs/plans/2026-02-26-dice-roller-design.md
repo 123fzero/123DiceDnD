@@ -1,4 +1,4 @@
-# Dice Roller for Flipper Zero — Design
+# 123DiceDnD for Flipper Zero — Design
 
 ## Summary
 
@@ -8,7 +8,7 @@ Native Flipper Zero app: D&D dice roller with full polyhedral set (d4, d6, d8, d
 
 ### Splash (~2 sec)
 - Pixel art Claude character (24x32px, 1-bit XBM inline in C code)
-- "Dice Roller" + "Co-authored by Claude"
+- "123DiceDnD" + "Co-authored by Claude"
 - Auto-dismiss after 2 seconds, or skip with any button
 
 ### Main / Result

@@ -2,7 +2,7 @@
 
 ## Project
 
-Flipper Zero native app — D&D dice roller ("123 Dice"). Runs on Momentum firmware.
+Flipper Zero native app — `123DiceDnD`. Runs on Momentum firmware.
 
 ## Build
 
@@ -19,7 +19,7 @@ SDK: Momentum firmware (`ufbt update --index-url=https://up.momentum-fw.dev/firm
 - `dice_roller/dice_roller.c` — all app logic (state machine, drawing, input, animation)
 - `dice_roller/dice_sprites.h` — auto-generated XBM sprite arrays (do not edit manually)
 - `dice_roller/tools/gen_sprites.py` — Python script to regenerate sprites
-- `dice_roller/application.fam` — app manifest (appid: `dice_roller`, name: `123 Dice`)
+- `dice_roller/application.fam` — app manifest (appid: `dice_roller`, name: `123DiceDnD`)
 
 ## Architecture
 
