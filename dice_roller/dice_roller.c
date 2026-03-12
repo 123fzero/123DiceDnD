@@ -6,47 +6,8 @@
 #include <notification/notification_messages.h>
 #include "dice_sprites.h"
 
-/* Classic Claude mascot - rounded blob with sparkle, no hat */
-#define CLAUDE_WIDTH 24
-#define CLAUDE_HEIGHT 32
-static const uint8_t claude_xbm[] = {
-    0x00, 0x00, 0x00,  /* Row  0: empty                     */
-    0x00, 0x08, 0x00,  /* Row  1: sparkle top dot           */
-    0x00, 0x14, 0x00,  /* Row  2: sparkle arms              */
-    0x00, 0x08, 0x00,  /* Row  3: sparkle bottom dot        */
-    0x00, 0x00, 0x00,  /* Row  4: space                     */
-    0x00, 0x7E, 0x00,  /* Row  5: head top (round)          */
-    0x80, 0xFF, 0x01,  /* Row  6: head widening             */
-    0xC0, 0xFF, 0x03,  /* Row  7: head                      */
-    0xE0, 0xFF, 0x07,  /* Row  8: head wider                */
-    0xF0, 0xFF, 0x0F,  /* Row  9: body top                  */
-    0xF0, 0xFF, 0x0F,  /* Row 10: body                      */
-    0xF8, 0xFF, 0x1F,  /* Row 11: body full width           */
-    0xF8, 0xFF, 0x1F,  /* Row 12: body                      */
-    0xF8, 0xFF, 0x1F,  /* Row 13: body                      */
-    0xB8, 0xFF, 0x1D,  /* Row 14: eyes (2x2 gaps)           */
-    0xB8, 0xFF, 0x1D,  /* Row 15: eyes                      */
-    0xF8, 0xFF, 0x1F,  /* Row 16: body below eyes           */
-    0xF8, 0xFF, 0x1F,  /* Row 17: body                      */
-    0xF8, 0xFF, 0x1F,  /* Row 18: body                      */
-    0xF8, 0xFF, 0x1F,  /* Row 19: body                      */
-    0xF8, 0xFF, 0x1F,  /* Row 20: body                      */
-    0xF0, 0xFF, 0x0F,  /* Row 21: narrowing                 */
-    0xF0, 0xFF, 0x0F,  /* Row 22: narrowing                 */
-    0xE0, 0xFF, 0x07,  /* Row 23: narrowing                 */
-    0xC0, 0xFF, 0x03,  /* Row 24: narrow                    */
-    0xC0, 0xFF, 0x03,  /* Row 25: waist                     */
-    0xC0, 0xC3, 0x03,  /* Row 26: leg split                 */
-    0xE0, 0xC3, 0x07,  /* Row 27: legs with feet            */
-    0xE0, 0x81, 0x07,  /* Row 28: feet spread               */
-    0x00, 0x00, 0x00,  /* Row 29: empty                     */
-    0x00, 0x00, 0x00,  /* Row 30: empty                     */
-    0x00, 0x00, 0x00,  /* Row 31: empty                     */
-};
-
 /* Screen states */
 typedef enum {
-    DiceScreenSplash,
     DiceScreenMain,
     DiceScreenRolling,
     DiceScreenResult,
@@ -79,8 +40,6 @@ static const char* dice_names[] = {"d4", "d6", "d8", "d10", "d12", "d20"};
 
 #define MAX_DICE 6
 #define TOTAL_ANIM_TICKS 16
-#define SPLASH_DURATION_MS 4000
-
 typedef struct {
     DiceScreen screen;
     DiceType dice_type;
@@ -143,15 +102,6 @@ static void draw_die_sprite(Canvas* canvas, int x, int y, int dice_type, int fra
     } else {
         canvas_draw_xbm(canvas, x, y, DICE_SPRITE_SIZE, DICE_SPRITE_SIZE, sprite);
     }
-}
-
-/* Draw the splash screen */
-static void draw_splash(Canvas* canvas) {
-    canvas_draw_xbm(canvas, 52, 2, CLAUDE_WIDTH, CLAUDE_HEIGHT, claude_xbm);
-    canvas_set_font(canvas, FontPrimary);
-    canvas_draw_str_aligned(canvas, 64, 42, AlignCenter, AlignTop, "123DiceDnD");
-    canvas_set_font(canvas, FontSecondary);
-    canvas_draw_str_aligned(canvas, 64, 55, AlignCenter, AlignTop, "Co-authored by Claude");
 }
 
 /* Draw the main/rolling/result screen */
@@ -259,16 +209,7 @@ static void dice_draw_callback(Canvas* canvas, void* ctx) {
 
     canvas_clear(canvas);
 
-    switch(state->screen) {
-    case DiceScreenSplash:
-        draw_splash(canvas);
-        break;
-    case DiceScreenMain:
-    case DiceScreenRolling:
-    case DiceScreenResult:
-        draw_main(canvas, state);
-        break;
-    }
+    draw_main(canvas, state);
 
     furi_mutex_release(state->mutex);
 }
@@ -311,7 +252,7 @@ int32_t dice_roller_main(void* p) {
 
     /* Allocate state */
     DiceState* state = malloc(sizeof(DiceState));
-    state->screen = DiceScreenSplash;
+    state->screen = DiceScreenMain;
     state->dice_type = DiceTypeD6;
     state->quantity = 1;
     state->sum = 0;
@@ -343,9 +284,6 @@ int32_t dice_roller_main(void* p) {
     FuriTimer* timer = furi_timer_alloc(dice_timer_callback, FuriTimerTypePeriodic, event_queue);
     furi_timer_start(timer, furi_ms_to_ticks(50));
 
-    /* Record splash start time */
-    uint32_t splash_start = furi_get_tick();
-
     /* Event loop */
     bool running = true;
     DiceEvent event;
@@ -362,14 +300,6 @@ int32_t dice_roller_main(void* p) {
         if(event.type == EventTypeTick) {
             /* Handle tick events */
             switch(state->screen) {
-            case DiceScreenSplash:
-                /* Check if splash duration has elapsed */
-                if((furi_get_tick() - splash_start) >=
-                   furi_ms_to_ticks(SPLASH_DURATION_MS)) {
-                    state->screen = DiceScreenMain;
-                }
-                break;
-
             case DiceScreenRolling:
                 state->anim_tick++;
                 roll_all_dice(state);
@@ -392,11 +322,6 @@ int32_t dice_roller_main(void* p) {
                 running = false;
             } else if(event.input.type == InputTypeShort) {
                 switch(state->screen) {
-                case DiceScreenSplash:
-                    /* Any key skips splash */
-                    state->screen = DiceScreenMain;
-                    break;
-
                 case DiceScreenMain:
                 case DiceScreenResult:
                     switch(event.input.key) {
